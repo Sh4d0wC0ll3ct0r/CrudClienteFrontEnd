@@ -1,0 +1,142 @@
+
+<div class="container">
+
+<!-- FORM  -->	    
+<div class="col-md-12" *ngIf="showForm">
+	       
+	<form #formAlbum="ngForm"  (ngSubmit)="onSubmit()" class="form-horizontal" id="form-edit-client">
+        <fieldset>
+
+        <!-- Form Name -->
+        <legend>Cliente</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="client-name">Name</label>  
+        <div class="col-md-4">
+        <input type="text" #title="ngModel" name="client-name" [(ngModel)]="cliente.nombre" required id="client-name"  placeholder="your client's name" class="form-control input-md">
+        <span class="help-block">Full name of your customer</span>  
+        </div>
+        </div>
+
+        <!-- Prepended text-->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="client-email">Email</label>
+        <div class="col-md-4">
+            <div class="input-group">
+            <span class="input-group-addon">@</span>
+            <input #title="ngModel" [(ngModel)]="cliente.email" required id="client-email" name="client-email" class="form-control" placeholder="yourname@yourdomain.com" type="text">
+            </div>
+            <p class="help-block">Email of your client</p>
+        </div>
+        </div>
+
+        <!-- Multiple Radios -->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="client-status">Client status</label>
+            <div class="col-md-4">
+                <div class="radio" >
+                    <label for="client-status-0">
+                    <input type="radio" [(ngModel)]="cliente.estado" [checked]="cliente.estado == true " [value]="true" required    name="client-status" id="client-status-0"  >
+                    Activo
+                    </label>
+                </div>
+                  <div class="radio" >
+                    <label for="client-status-0">
+                    <input type="radio"  [(ngModel)]="cliente.estado"  [checked]="cliente.estado == false " [value]="false" required    name="client-status" id="client-status-0"  >
+                    Inactivo
+                    </label>
+                </div>
+        
+            </div>
+        </div>
+
+
+        <!-- Button -->
+        <div class="form-group">
+        <label class="col-md-4 control-label" for="btn-save"></label>
+        <div class="col-md-4">
+           <input type="submit" value="Guardar" />
+        </div>
+        </div>
+
+        </fieldset>
+    </form>
+
+</div> 
+	    
+   
+<!-- LIST -->
+<div class=col-md-12>
+    
+    <form id="form-list-client">
+            <legend>Listado de clientes</legend>
+    
+    <div class="pull-right">
+        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Refresh</a>
+        <a class="btn btn-default-btn-xs btn-success" (click)="mostrarForm()"><i class="glyphicon glyphicon-plus" ></i> New</a>
+    </div>
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+                
+        </thead>
+        <tbody id="form-list-client-body">
+         
+                    <tr *ngFor="let cli of clientes" class="cliente-item">
+                        <td>
+                            {{cli.nombre}}
+                        </td>
+                        <td>{{cli.email}}</td>
+                        <td>{{cli.estado}}</td>
+                        <td>
+                            <a title="view this user" class="btn btn-default btn-sm " (click)="viewCliente(cli)"> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
+                            <a title="edit this user" class="btn btn-default btn-sm " (click)="editCliente(cli._id,cli)"> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
+                            <a title="delete this user" class="btn btn-default btn-sm " (click)="deleteCliente(cli._id)" > <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                            
+                        </td>
+                    </tr>
+	                
+        </tbody>
+    </table>
+    </form>
+
+    
+</div>
+
+
+<br> 
+
+<div class="col-md-12">
+    
+            <legend>Cliente</legend>
+            
+             <div>
+                
+                    <div class2=" col-md-9 col-lg-9 "> 
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <td>Nombre:</td>
+                                <td>{{cliente.nombre}}</td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td><a href="mailto:{{cliente.email}}">{{cliente.email}}</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                
+                
+            </div>
+          
+</div>
+	    
+ 
+</div>
